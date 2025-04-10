@@ -121,7 +121,7 @@ benchmarkcr.plot_significant_complexes()
 ## 📂 Examples
 
 - [src/benchmarkcr/examples/basic_usage.py](src/benchmarkcr/examples/basic_usage.py)
-- [src/benchmarkcr/notebooks/demo.ipynb](src/benchmarkcr/examples/basic_usage.py)
+- [src/benchmarkcr/notebooks/demo.ipynb](src/benchmarkcr/examples/demo.ipynb)
 
 ---
 

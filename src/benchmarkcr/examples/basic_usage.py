@@ -1,45 +1,8 @@
-# benchmarkCR
-
-🧬 **benchmarkCR** is a benchmarking toolkit for evaluating CRISPR screen results against biological gold standards. It provides precision-recall analysis using reference gene sets from CORUM protein complexes, Gene Ontology Biological Processes (GO-BP), KEGG pathways, and other curated resources. The toolkit computes gene-level and complex-level performance metrics, helping researchers systematically assess the biological relevance and resolution of their CRISPR screening data.
-
-
----
-
-## 🔧 Features
-
-- Precision-recall curve generation for ranked gene lists
-
-- Evaluation using CORUM complexes, GO terms, pathways
-
-- Complex-level resolution analysis and visualization
-
-- Easy integration into CRISPR screen workflows
-
----
-
-## 📦 Installation
-
-Suggested to use Python version `3.10` with `virtual env`.
-
-Create `venv`
-
-```bash
-conda create -n p310 python=3.10
-conda activate p310
-pip install uv
-```
-
-Install benchmarkCR
-
-```bash
-uv pip install -e .
-```
-
----
-
-## 🚀 Quickstart
-
-```python
+"""
+Basic usage example of the benchmarkCR package.
+Demonstrates initialization, data loading, analysis, and plotting.
+"""
+#%%
 import benchmarkcr
 
 inputs = {
@@ -98,17 +61,4 @@ benchmarkcr.plot_precision_recall_curve()
 benchmarkcr.plot_percomplex_scatter()
 benchmarkcr.plot_complex_contributions()
 benchmarkcr.plot_significant_complexes()
-```
 
----
-
-## 📂 Examples
-
-- [examples/basic_usage.py](examples/basic_usage.py)
-- [notebooks/demo.ipynb](notebooks/demo.ipynb)
-
----
-
-## 📃 License
-
-MIT

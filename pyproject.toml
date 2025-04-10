@@ -1,0 +1,49 @@
+[project]
+name = "benchmarkCR"
+version = "0.1.0"
+description = "benchmarkCR (systematic CRISPR screen benchmarking framework) is a benchmarking toolkit for evaluating CRISPR screen results against biological gold standards. The toolkit computes gene-level and complex-level performance metrics, helping researchers systematically assess the biological relevance and resolution of their CRISPR screening data."
+readme = "README.md"
+authors = [
+    { name = "Yasir Demirtaş", email = "tyasird@hotmail.com" }
+]
+requires-python = ">=3.8"
+
+
+# Exclude the input folder
+exclude = ["src/pyflex/input/*"]
+
+
+dependencies = [
+    "adjustText",           
+    "art",
+    "emoji",
+    "joblib",
+    "loguru",
+    "matplotlib",
+    "numpy>=1.22,<2.1",      
+    "pandas",
+    "python-slugify",
+    "scikit_learn",
+    "scipy",
+    "tqdm",
+    "pyarrow",
+    "bitarray"
+]
+
+
+[project.scripts]
+pyflex = "pyflex:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[tool.ruff]
+ignore = ["F541"]
+
+[tool.setuptools.package-data]
+pyflex = ["data/**/*.p", "data/**/*.csv", "data/**/*.tsv", "data/**/*.json", "data/**/*.txt", "data/**/*.xlsx", "data/**/*.xls", "data/**/*.h5", "data/**/*.hdf5"]
+
+[tool.hatch.build]
+exclude = ["**/result.pkl", "examples/output"]

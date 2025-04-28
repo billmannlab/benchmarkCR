@@ -3,12 +3,12 @@ import joblib
 from .logging_config import log
 
 
-def dsave(data, category, name=None, path="result.pkl"):
+def dsave(data, category, name=None, path=".benchmarkcr_result.pkl"):
     if os.path.exists(path):
         try:
             result = joblib.load(path)
         except EOFError:  # Handle corruption
-            log.info("Warning: result.pkl is corrupted. Recreating the file...")
+            log.info("Warning: .benchmarkcr_result.pkl is corrupted. Recreating the file...")
             os.remove(path)  # Delete the corrupted file
             result = {"pra": {}, "pra_percomplex": {}, "pr_auc": {}, "tmp": {}, "input": {}}
     else:
@@ -26,7 +26,7 @@ def dsave(data, category, name=None, path="result.pkl"):
     joblib.dump(result, path)
 
 
-def dload(category, name=None, path="result.pkl"):
+def dload(category, name=None, path=".benchmarkcr_result.pkl"):
     if os.path.exists(path):
         result = joblib.load(path)
         category_data = result.get(category, {})

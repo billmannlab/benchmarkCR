@@ -1,8 +1,11 @@
 
 import sys
 import emoji
-from loguru import logger as base_logger  
+from loguru import logger as global_logger
 from typing import TYPE_CHECKING
+
+pkg_logger = global_logger.bind(name="benchmarkcr")
+
 
 class CustomLogger:
     def __init__(self, logger):
@@ -42,7 +45,7 @@ class CustomLogger:
 if TYPE_CHECKING:
     log: CustomLogger
 else:
-    log = CustomLogger(base_logger)
+    log = CustomLogger(pkg_logger)
 
 
 

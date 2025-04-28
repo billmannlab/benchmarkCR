@@ -29,11 +29,27 @@ conda activate p310
 pip install uv
 ```
 
-Install benchmarkCR
+Install benchmarkCR via pip
+
+``` bash
+uv pip install benchmarkcr
+```
+
+or 
 
 ```bash
+pip install benchmarkcr
+```
+
+or Install benchmarkCR via git (to develop package in local)
+
+```bash
+git clone https://github.com/billmannlab/benchmarkCR.git
+cd benchmarkcr
 uv pip install -e .
 ```
+
+
 
 ---
 

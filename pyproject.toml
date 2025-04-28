@@ -20,7 +20,7 @@ dependencies = [
     "joblib",
     "loguru",
     "matplotlib",
-    "numpy>=1.22,<2.1",      
+    "numpy",      
     "pandas",
     "python-slugify",
     "scikit_learn",

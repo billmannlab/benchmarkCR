@@ -7,7 +7,8 @@ from pathlib import Path
 from .utils import dload  
 from itertools import combinations
 from .logging_config import log
-
+from IPython.display import set_matplotlib_formats
+set_matplotlib_formats('svg', 'pdf')
 
 def adjust_text_positions(coords, sizes, min_distance=0.08, max_y=1.0):
 
@@ -83,7 +84,7 @@ def plot_precision_recall_curve():
     # Save handling (output config still needed)
     if plot_config["save"]["save_plot"]:
         output_type = plot_config["save"]["output_type"]
-        output_path = Path(plot_config["save"]["output_folder"]) / f"precision_recall_curve.{output_type}"
+        output_path = Path(config["output_folder"]) / f"precision_recall_curve.{output_type}"
         fig.savefig(output_path, bbox_inches="tight", format=output_type)  # dpi comes from rcParams
 
     plt.show()
@@ -183,7 +184,7 @@ def plot_percomplex_scatter(n_top=10):
         # Save handling
         if plot_config["save"]["save_plot"]:
             output_type = plot_config["save"]["output_type"]
-            output_path = Path(plot_config["save"]["output_folder"]) / f"percomplex_scatter_{pair[0]}_vs_{pair[1]}.{output_type}"
+            output_path = Path(config["output_folder"]) / f"percomplex_scatter_{pair[0]}_vs_{pair[1]}.{output_type}"
             fig.savefig(output_path, bbox_inches="tight", format=output_type)
         
         plt.show()
@@ -255,7 +256,7 @@ def plot_percomplex_scatter_bysize():
         # Save handling (dpi comes from rcParams)
         if plot_config["save"]["save_plot"]:
             output_type = plot_config["save"]["output_type"]
-            output_path = Path(plot_config["save"]["output_folder"]) / f"percomplex_scatter_by_complexsize_{key}.{output_type}"
+            output_path = Path(config["output_folder"]) / f"percomplex_scatter_by_complexsize_{key}.{output_type}"
             fig.savefig(output_path, bbox_inches="tight", format=output_type)
 
         plt.show()
@@ -334,8 +335,7 @@ def plot_complex_contributions(min_pairs=10, min_precision_cutoff=0.2, num_compl
         # Save handling (remove explicit dpi)
         if plot_config["save"]["save_plot"]:
             output_type = plot_config["save"]["output_type"]
-            output_folder = Path(plot_config["save"]["output_folder"])
-            output_folder.mkdir(parents=True, exist_ok=True)
+            output_folder = Path(config["output_folder"])
             output_path = output_folder / f"complex_contributions_{key}.{output_type}"
             fig.savefig(output_path, bbox_inches="tight", format=output_type)
         plt.show()
@@ -392,8 +392,7 @@ def plot_significant_complexes():
     # Save figure if required
     if plot_config["save"]["save_plot"]:
         output_type = plot_config["save"]["output_type"]
-        output_folder = Path(plot_config["save"]["output_folder"])
-        output_folder.mkdir(parents=True, exist_ok=True)
+        output_folder = Path(config["output_folder"])
         output_path = output_folder / f"number_of_significant_complexes.{output_type}"
         plt.savefig(output_path, bbox_inches='tight', format=output_type)
 
@@ -436,7 +435,7 @@ def plot_auc_scores():
     # Save the figure if required
     if plot_config["save"]["save_plot"]:
         output_type = plot_config["save"]["output_type"]
-        output_folder = Path(plot_config["save"]["output_folder"])
+        output_folder = Path(config["output_folder"])
         output_folder.mkdir(parents=True, exist_ok=True)
         output_path = output_folder / f"prauc_scores.{output_type}"
         plt.savefig(output_path, bbox_inches='tight', format=output_type)

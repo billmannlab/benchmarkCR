@@ -29,7 +29,7 @@ def initialize(config={}):
     log.info("******************************************************************")
     log.started("Initialization")
 
-    result_file = "result.pkl"
+    result_file = ".benchmarkcr_result.pkl"
     if os.path.exists(result_file):
         log.info(f"{result_file} already exists. It will be removed and recreated.")
         os.remove(result_file)  # Remove the file
@@ -39,13 +39,12 @@ def initialize(config={}):
         "min_complex_size_for_percomplex": 3,
         "output_folder": "output",
         "gold_standard": "CORUM",
-        "color_map": "RdYlBu",  # Options include: 'tab10', 'tab20', 'Set1', etc.
-        "jaccard": True,    
+        "color_map": "RdYlBu",
+        "jaccard": True,
         "plotting": {
             "save": {
                 "save_plot": True,
                 "output_type": "png",
-                "output_folder": "./output",
             }
         },
         "preprocessing": {
@@ -62,9 +61,17 @@ def initialize(config={}):
         config = default_config
         
     dsave(config, "config")
+    update_matploblib_config(config)
+    output_folder = config.get("output_folder", "output")
+    os.makedirs(output_folder, exist_ok=True)
+    log.progress(f"Output folder '{output_folder}' ensured to exist.")
+    log.done("Initialization completed. ")
+    tprint("benchmarkCR",font="standard")
+
+
+def update_matploblib_config(config={}):
     log.progress("Updating matplotlib settings.")
     plt.rcParams.update({
-        # Font settings
         'font.size': 7,                # General font size
         'axes.titlesize': 10,          # Title size
         'axes.labelsize': 7,           # Axis labels (xlabel/ylabel)
@@ -86,11 +93,6 @@ def initialize(config={}):
         'text.usetex': False                # Ensure LaTeX is off
     })
     log.done("Matplotlib settings updated.")
-    output_folder = config.get("output_folder", "output")
-    os.makedirs(output_folder, exist_ok=True)
-    log.progress(f"Output folder '{output_folder}' ensured to exist.")
-    log.done("Initialization completed. ")
-    tprint("benchmarkCR",font="standard")
 
 
 
@@ -108,6 +110,7 @@ def pra(dataset_name, matrix, is_corr=False):
 
     if not is_corr:
         matrix = perform_corr(matrix, "numpy")
+        
     matrix = filter_matrix_by_genes(matrix, genes_present)
 
     log.info(f"Matrix shape: {matrix.shape}")
